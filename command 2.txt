@@ -1,0 +1,29 @@
+Commands:
+ 1>.group By
+select design from employess group by design;
++------------+
+| design     |
++------------+
+| manager    |
+| associate  |
+| accountant |
+| cashier    |
+| teamleader |
+| executive  |
+| developer  |
+| surgeon    |
++------------+
+
+select design ,count(emp_Id) from employess group by design;
++------------+---------------+
+| design     | count(emp_Id) |
++------------+---------------+
+| manager    |             2 |
+| associate  |             2 |
+| accountant |             1 |
+| cashier    |             1 |
+| teamleader |             1 |
+| executive  |             1 |
+| developer  |             1 |
+| surgeon    |             1 |
++------------+---------------+

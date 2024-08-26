@@ -1,0 +1,68 @@
+https://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL_Beginner.html
+sum command:
+mysql> select sum(quantity) as total_quantity from market;
++----------------+
+| total_quantity |
++----------------+
+|            615 |
++----------------+
+
+round commmand:
+mysql> select round(sum(quantity)) as total_quantity from market;
++----------------+
+| total_quantity |
++----------------+
+|            615 |
++----------------+
+avg command:
+mysql> select avg(quantity) as avg_total_quantity from market;
++--------------------+
+| avg_total_quantity |
++--------------------+
+|            68.3333 |
++--------------------+
+date format command:
+ select sale_id, date_format(sale_date,'%d-%m-%y') as formatted_date from table1;
++---------+----------------+
+| sale_id | formatted_date |
++---------+----------------+
+|       1 | 01-01-24       |
+|       2 | 02-01-24       |
+|       3 | 02-01-24       |
+|       4 | 03-01-24       |
+|       5 | 03-01-24       |
++---------+----------------+
+5 rows in set (0.03 sec)
+
+> select * from student;
++------+---------+----------------+--------+------+-------+
+| sno  | name    | address        | course | fees | marks |
++------+---------+----------------+--------+------+-------+
+|  101 | sheetal | indore         | BBA    | NULL | 50    |
+|  102 | mansi   | pune           | btech  | NULL | 60    |
+|  103 | rohinu  | vaishali nagar | mca    | NULL | 80    |
+|  104 | babu    | indore         | BBA    | NULL | 70    |
+|  105 | priya   | harda          | NULL   | NULL | 77    |
+|  106 | saloni  | indore         | BBA    | NULL | 90    |
+|  107 | otaku   | indore         | BBA    | NULL | 99    |
+|  108 | mansi   | hydrabad       | btech  | NULL | 59    |
+|  109 | palalvi | dewas          | NULL   | NULL | 29    |
+|  110 | kuldeep | dewas          | NULL   | NULL | 69    |
++------+---------+----------------+--------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select st.name, st.marks, case when st.marks >=35 then 'pass' else 'fail' end as 'remark' from student as st;
++---------+-------+--------+
+| name    | marks | remark |
++---------+-------+--------+
+| sheetal | 50    | pass   |
+| mansi   | 60    | pass   |
+| rohinu  | 80    | pass   |
+| babu    | 70    | pass   |
+| priya   | 77    | pass   |
+| saloni  | 90    | pass   |
+| otaku   | 99    | pass   |
+| mansi   | 59    | pass   |
+| palalvi | 29    | fail   |
+| kuldeep | 69    | pass   |
++---------+-------+--------+
