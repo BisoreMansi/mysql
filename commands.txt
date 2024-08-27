@@ -1,0 +1,90 @@
+Commands:
+Subcommands----
+ select * from market where quantity =(select max(quantity) from market);
++------+-------+-------+----------+
+| sno  | name  | month | quantity |
++------+-------+-------+----------+
+|    9 | krish | may   |       95 |
++------+-------+-------+----------+
+between command-----
+ select * from market where sno between 1 and 10 ;
++------+--------+--------+----------+
+| sno  | name   | month  | quantity |
++------+--------+--------+----------+
+|    1 |  rahul |  march |       45 |
+|    2 | mohit  | jan    |       78 |
+|    3 | krish  | march  |       65 |
+|    3 | grisha | dec    |       23 |
+|    4 |  rahul | may    |       22 |
+|    5 | krish  | feb    |       87 |
+|   10 | mohit  | nov    |       88 |
+|    9 | krish  | may    |       95 |
+|    8 | grisha | dec    |       38 |
+|    7 | krish  | june   |       92 |
+|    6 | rahul  | feb    |       70 |
++------+--------+--------+----------+
+in command ------
+ select * from market where sno in(1,5);
++------+--------+--------+----------+
+| sno  | name   | month  | quantity |
++------+--------+--------+----------+
+|    1 |  rahul |  march |       45 |
+|    5 | krish  | feb    |       87 |
++------+--------+--------+----------+
+group by command------
+ SELECT name, SUM(quantity) AS total_quantity FROM market GROUP BY name;
++--------+----------------+
+| name   | total_quantity |
++--------+----------------+
+|  rahul |             67 |
+| mohit  |            166 |
+| krish  |            339 |
+| grisha |             61 |
+| rahul  |             70 |
++--------+----------------+
+having command---
+ SELECT name, count(sno)  from market group by name having name = 'rahul';
++-------+------------+
+| name  | count(sno) |
++-------+------------+
+| rahul |          1 |
++-------+------------+
+ modify command:
+alter table market modify name varchar(30);
+before
+---------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sno      | int         | YES  |     | NULL    |       |
+| name     | varchar(25) | YES  |     | NULL    |       |
+| month    | varchar(20) | YES  |     | NULL    |       |
+| quantity | int         | YES  |     | NULL    |       |
+after
+
+
+mysql> desc market;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sno      | int         | YES  |     | NULL    |       |
+| name     | varchar(30) | YES  |     | NULL    |       |
+| month    | varchar(20) | YES  |     | NULL    |       |
+| quantity | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+delet command:
+delet from market where sno=3;
+ select * from market;
++------+--------+--------+----------+
+| sno  | name   | month  | quantity |
++------+--------+--------+----------+
+|    1 |  rahul |  march |       45 |
+|    2 | mohit  | jan    |       78 |
+|    4 |  rahul | may    |       22 |
+|    5 | krish  | feb    |       87 |
+|   10 | mohit  | nov    |       88 |
+|    9 | krish  | may    |       95 |
+|    8 | grisha | dec    |       38 |
+|    7 | krish  | june   |       92 |
+|    6 | rahul  | feb    |       70 |
++------+--------+--------+----------+
+9 rows in set (0.00 sec)
