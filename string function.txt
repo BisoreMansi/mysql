@@ -1,0 +1,95 @@
+                                           String Function
+1 .Concat
+	 select emp_Id , concat(name,' ',design) as nameDesignation from employess;
++--------+------------------+
+| emp_Id | nameDesignation  |
++--------+------------------+
+|    101 | raju manager     |
+|    103 | paul associate   |
+|    104 | alex accountant  |
+|    105 | victor associate |
++--------+------------------+
+
+2.Concat_Ws
+mysql> select concat_ws('-' ,emp_Id,name) as col from employess;
++------------+
+| col        |
++------------+
+| 101-raju   |
+| 103-paul   |
+| 104-alex   |
+| 105-victor |
+
+
+3.Substring
+ select substring("heymansi",4,8);
++---------------------------+
+| substring("heymansi",4,8) |
++---------------------------+
+
+mysql> select substring('hey mansi,hey pallavi',-4);
++---------------------------------------+
+| substring('hey mansi,hey pallavi',-4) |
++---------------------------------------+
+| lavi                                  |
++---------------------------------------+
+
+mysql> select substring(emp_Id , 2) from employess;
++-----------------------+
+| substring(emp_Id , 2) |
++-----------------------+
+| 01                    |
+| 03                    |
+| 04                    |
+| 05                    |
++-----------------------+
+
+mysql> select replace(emp_Id ,10 ,1000) from employess;
++---------------------------+
+| replace(emp_Id ,10 ,1000) |
++---------------------------+
+| 10001                     |
+| 10003                     |
+| 10004                     |
+| 10005                     |
++---------------------------+
+
+
+4.Reverse 
+
+select emp_Id , reverse(name) as rname from employess;
++--------+--------+
+| emp_Id | rname  |
++--------+--------+
+|    101 | ujar   |
+|    103 | luap   |
+|    104 | xela   |
+|    105 | rotciv |
++--------+--------+
+
+5. char_length
+ select  char_length(name) from employess;
++-------------------+
+| char_length(name) |
++-------------------+
+|                 4 |
+|                 4 |
+|                 4 |
+|                 6 |
++-------------------+
+
+6.upper lower
+ select upper(name) from employess;
++-------------+
+| upper(name) |
++-------------+
+| RAJU        |
+| PAUL        |
+| ALEX        |
+| VICTOR      |
++-------------+
+SELECT UPPER(emp_Id) AS emp_Id, UPPER(name) AS name, UPPER(other_column) AS other_column
+FROM employees;
+
+
+
