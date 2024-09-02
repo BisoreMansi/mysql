@@ -1,0 +1,133 @@
+create database mysqltestdb;
+
+ use mysqltestdb;
+
+     create table customer(ID int not null auto_increment,
+    -> name varchar(50) not null,
+    -> city varchar(50) not null,
+    -> primary key (ID)
+    -> );
+
+desc customer;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| ID    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(50) | NO   |     | NULL    |                |
+| city  | varchar(50) | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+
+ create table contact (
+    -> ID int,
+    -> customer_Id int,
+    -> customer_info varchar(50) not null,
+    -> type varchar(50) not null,
+    -> index par_ind (customer_Id),
+    -> constraint fk_customer foreign key (customer_Id)
+    -> references customer(ID)
+    -> on delete cascade
+    -> on update cascade
+    -> );
+  desc contact;
+   +---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
+   +---------------+-------------+------+-----+---------+-------+
+| ID            | int         | YES  |     | NULL    |       |
+| customer_Id   | int         | YES  | MUL | NULL    |       |
+| customer_info | varchar(50) | NO   |     | NULL    |       |
+| type          | varchar(50) | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+ select * from customer;
++----+----------+----------+
+| ID | name     | city     |
++----+----------+----------+
+|  1 | mansi    | dewas    |
+|  2 | manisha  | ujjain   |
+|  3 | divya    | rau      |
+|  4 | chanchal | gawalior |
++----+----------+----------+
+select * from contact;
++------+-------------+--------------------+--------+
+| ID   | customer_Id | customer_info      | type   |
++------+-------------+--------------------+--------+
+| NULL |           1 | mansi@abc.com      | work   |
+| NULL |           2 | manisha@abc.com    | home   |
+| NULL |           1 | mansimansi@hgh.com | home   |
+| NULL |           1 | 223434             | number |
+| NULL |           2 | 3434287823         | number |
+| NULL |           3 | div@adsa.com       | home   |
+| NULL |           2 | man@hdj.com        | work   |
+| NULL |           3 | divya@dshjs.com    | work   |
+| NULL |           4 | 675765656          | number |
++------+-------------+--------------------+--------+
+
+ delete from customer where name ="chanchal";
+ select * from contact;
++------+-------------+--------------------+--------+
+| ID   | customer_Id | customer_info      | type   |
++------+-------------+--------------------+--------+
+| NULL |           1 | mansi@abc.com      | work   |
+| NULL |           2 | manisha@abc.com    | home   |
+| NULL |           1 | mansimansi@hgh.com | home   |
+| NULL |           1 | 223434             | number |
+| NULL |           2 | 3434287823         | number |
+| NULL |           3 | div@adsa.com       | home   |
+| NULL |           2 | man@hdj.com        | work   |
+| NULL |           3 | divya@dshjs.com    | work   |
++------+-------------+--------------------+--------+
+ select * from customer;
++----+---------+--------+
+| ID | name    | city   |
++----+---------+--------+
+|  1 | mansi   | dewas  |
+|  2 | manisha | ujjain |
+|  3 | divya   | rau    |
++----+---------+--------+
+
+https://www.javatpoint.com/mysql-foreign-key
+
+
+
+
+
+second exAMPLE
+ create table customers( cust_Id int auto_increment,
+    -> name varchar(50),
+    -> email varchar(50),
+    -> primary key(cust_Id)
+    -> );
+
+ insert into  customers(name,email) values ("mansi","man@jhdjs.com"),
+    -> ("vaishali","vas@hkjfh.com"),
+    -> ("lila","lila@hsjkh.com");
+
+select * from customers;
++---------+----------+----------------+
+| cust_Id | name     | email          |
++---------+----------+----------------+
+|       1 | mansi    | man@jhdjs.com  |
+|       2 | vaishali | vas@hkjfh.com  |
+|       3 | lila     | lila@hsjkh.com |
++---------+----------+----------------+
+
+ create table orders(ord_Id int auto_increment primary key ,
+    -> date Date,
+    -> amount decimal(10,2),
+    -> cust_Id int,
+    -> foreign key (cust_Id) references customers(cust_Id));
+
+INSERT INTO orders (date, amount, cust_Id)
+    -> VALUES
+    -> ('2023-08-23', 45, 1),
+    -> ('2023-08-23', 56, 3),
+    -> ('2023-08-11', 55, 2),
+    -> ('2023-08-23', 34, 1);
+ select * from orders;
++--------+------------+--------+---------+
+| ord_Id | date       | amount | cust_Id |
++--------+------------+--------+---------+
+|      1 | 2023-08-23 |  45.00 |       1 |
+|      2 | 2023-08-23 |  56.00 |       3 |
+|      3 | 2023-08-11 |  55.00 |       2 |
+|      4 | 2023-08-23 |  34.00 |       1 |
++--------+------------+--------+---------+
