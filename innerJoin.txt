@@ -1,0 +1,227 @@
+inner join
+
+Definition: An INNER JOIN retrieves records that have matching values in both tables involved in the join.
+ It only includes rows where there is a match in both tables.
+Example: If you have a Customers table and an
+ Orders table, an INNER JOIN on CustomerID will give you only those customers who have placed orders.
+
+
+ create table orders( orderID varchar(10), customerID varchar(10), employeeID varchar(10), orderDate date,shipperID int);
+Query OK, 0 rows affected (1.84 sec)
+
+mysql> insert into orders values(1031,1,5,"2024-05-09",3);
+Query OK, 1 row affected (0.20 sec)
+ 
+
+mysql> insert into orders (orderID,customerID,employeeID,orderDate,shipperID)values
+(1032,2,6,"2024-11-4",4), 
+(1033,21,90,"2024-07-12",54),
+(1034,61,76,"2024-05-12",3),
+(1035,1,8,"2024-4-30",13),
+(1036,91,7,"2024-12-08",6),
+(1037,11,15,"2024-08-31",4),
+(1038,2,7,"2024-05-16",4),
+(1039,9,7,"2024-1-12",1),
+(1040,8,6,"2024-10-29",4),
+(1041,3,6,"2024-05-19",9);
+Query OK, 10 rows affected (0.34 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+ select *from orders;
++---------+------------+------------+------------+-----------+
+| orderID | customerID | employeeID | orderDate  | shipperID |
++---------+------------+------------+------------+-----------+
+| 1031    | 1          | 5          | 2024-05-09 |         3 |
+| 1032    | 2          | 6          | 2024-11-04 |         4 |
+| 1033    | 21         | 90         | 2024-07-12 |        54 |
+| 1034    | 61         | 76         | 2024-05-12 |         3 |
+| 1035    | 1          | 8          | 2024-04-30 |        13 |
+| 1036    | 91         | 7          | 2024-12-08 |         6 |
+| 1037    | 11         | 15         | 2024-08-31 |         4 |
+| 1038    | 2          | 7          | 2024-05-16 |         4 |
+| 1039    | 9          | 7          | 2024-01-12 |         1 |
+| 1040    | 8          | 6          | 2024-10-29 |         4 |
+| 1041    | 3          | 6          | 2024-05-19 |         9 |
++---------+------------+------------+------------+-----------+
+
+
+ create table customers(customerID int ,customerName varchar(25),contactName varchar(25),address varchar(25));
+Query OK, 0 rows affected (1.08 sec)
+
+mysql> desc customers;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| customerID   | int         | YES  |     | NULL    |       |
+| customerName | varchar(25) | YES  |     | NULL    |       |
+| contactName  | varchar(25) | YES  |     | NULL    |       |
+| address      | varchar(25) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.07 sec)
+
+> insert into customers(customerID,customerNAme,contactName,address)values(1,"mansi","bisore","indore"),(2,"divya","solanki","rau"),(21,"chanchal","aklare","nimach"),(61,"nandni","bachane","indore"),(1,"patidar","chanchal","harda");
+Query OK, 5 rows affected (0.08 sec)
+
+ select * from customers;
++------------+--------------+-------------+----------------+
+| customerID | customerName | contactName | address        |
++------------+--------------+-------------+----------------+
+|          1 | mansi        | bisore      | indore         |
+|          2 | divya        | solanki     | rau            |
+|         21 | chanchal     | aklare      | nimach         |
+|         61 | nandni       | bachane     | indore         |
+|          1 | patidar      | chanchal    | harda          |
+|         91 | mahima       | deshmukh    | indore         |
+|         11 | kashish      | more        | chindwada      |
+|          2 | vaishali     | soni        | sambhaji nagar |
+|          9 | avantika     | tayde       | indore         |
+|          8 | Saloni       | chouhan     | harda          |
+|          3 | priyanshi    | sharma      | khandwa        |
++------------+--------------+-------------+----------------+
+11 rows in set (0.00 sec)
+
+
+ select orders.orderID ,customers.customerName from orders inner join customers on orders.customerID = customers.customerID;
++---------+--------------+
+| orderID | customerName |
++---------+--------------+
+| 1035    | mansi        |
+| 1031    | mansi        |
+| 1038    | divya        |
+| 1032    | divya        |
+| 1033    | chanchal     |
+| 1034    | nandni       |
+| 1035    | patidar      |
+| 1031    | patidar      |
+| 1036    | mahima       |
+| 1037    | kashish      |
+| 1038    | vaishali     |
+| 1032    | vaishali     |
+| 1039    | avantika     |
+| 1040    | Saloni       |
+| 1041    | priyanshi    |
++---------+--------------+
+15 rows in set (0.03 sec)
+
+
+
+
+Left join
+
+LEFT JOIN (LEFT OUTER JOIN):
+
+Definition: A LEFT JOIN returns all records from the left table and the matched 
+records from the right table. If there is no match, NULL values are returned for columns from the right table.
+
+Example: If you have a Customers table and an Orders table, a LEFT JOIN on CustomerID will return all customers
+, including those who have not placed any orders (with NULLs in the Orders columns).
+
+ SELECT Customers.CustomerName, Orders.OrderID
+    -> FROM Customers
+    -> LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+    -> ORDER BY Customers.CustomerName;
++--------------+---------+
+| CustomerName | OrderID |
++--------------+---------+
+| avantika     | 1039    |
+| chanchal     | 1033    |
+| divya        | 1038    |
+| divya        | 1032    |
+| kashish      | 1037    |
+| mahima       | 1036    |
+| mansi        | 1035    |
+| mansi        | 1031    |
+| nandni       | 1034    |
+| patidar      | 1035    |
+| patidar      | 1031    |
+| priyanshi    | 1041    |
+| Saloni       | 1040    |
+| vaishali     | 1038    |
+| vaishali     | 1032    |
++--------------+---------+
+
+
+
+Right Join
+
+Definition: A RIGHT JOIN returns all records from the right table and the matched records from the left table.
+ If there is no match, NULL values are returned for columns from the left table.
+Example: 
+If you have a Customers table and an Orders table, a RIGHT JOIN on CustomerID will return all orders
+, including those that do not have matching customer information (with NULLs in the Customers columns).
+
+ select  orders.orderID,customers.customerName
+    -> from orders
+    -> right join customers on orders.customerID = customers.customerID
+    -> order by orders.orderID;
++---------+--------------+
+| orderID | customerName |
++---------+--------------+
+| 1031    | mansi        |
+| 1031    | patidar      |
+| 1032    | divya        |
+| 1032    | vaishali     |
+| 1033    | chanchal     |
+| 1034    | nandni       |
+| 1035    | mansi        |
+| 1035    | patidar      |
+| 1036    | mahima       |
+| 1037    | kashish      |
+| 1038    | divya        |
+| 1038    | vaishali     |
+| 1039    | avantika     |
+| 1040    | Saloni       |
+| 1041    | priyanshi    |
++---------+--------------+
+
+Cross Join
+Definition: A CROSS JOIN returns the Cartesian product of the two tables, meaning every row from the first 
+table is combined with every row from the second table. This can result in a very large number of rows.
+
+Example: If you have a Customers table with 10 rows and an Orders table with 5 rows, a CROSS JOIN will
+ return 50 rows (10 x 5).
+
+ select customers.address, orders.orderDate 
+from orders cross join customers 
+where customers.customerID = orders.customerID;
++----------------+------------+
+| address        | orderDate  |
++----------------+------------+
+| indore         | 2024-04-30 |
+| indore         | 2024-05-09 |
+| rau            | 2024-05-16 |
+| rau            | 2024-11-04 |
+| nimach         | 2024-07-12 |
+| indore         | 2024-05-12 |
+| harda          | 2024-04-30 |
+| harda          | 2024-05-09 |
+| indore         | 2024-12-08 |
+| chindwada      | 2024-08-31 |
+| sambhaji nagar | 2024-05-16 |
+| sambhaji nagar | 2024-11-04 |
+| indore         | 2024-01-12 |
+| harda          | 2024-10-29 |
+| khandwa        | 2024-05-19 |
++----------------+------------+
+
+Natural Join
+ select * from orders natural join customers;
++------------+---------+------------+------------+-----------+--------------+-------------+----------------+
+| customerID | orderID | employeeID | orderDate  | shipperID | customerName | contactName | address        |
++------------+---------+------------+------------+-----------+--------------+-------------+----------------+
+| 1          | 1035    | 8          | 2024-04-30 |        13 | mansi        | bisore      | indore         |
+| 1          | 1031    | 5          | 2024-05-09 |         3 | mansi        | bisore      | indore         |
+| 2          | 1038    | 7          | 2024-05-16 |         4 | divya        | solanki     | rau            |
+| 2          | 1032    | 6          | 2024-11-04 |         4 | divya        | solanki     | rau            |
+| 21         | 1033    | 90         | 2024-07-12 |        54 | chanchal     | aklare      | nimach         |
+| 61         | 1034    | 76         | 2024-05-12 |         3 | nandni       | bachane     | indore         |
+| 1          | 1035    | 8          | 2024-04-30 |        13 | patidar      | chanchal    | harda          |
+| 1          | 1031    | 5          | 2024-05-09 |         3 | patidar      | chanchal    | harda          |
+| 91         | 1036    | 7          | 2024-12-08 |         6 | mahima       | deshmukh    | indore         |
+| 11         | 1037    | 15         | 2024-08-31 |         4 | kashish      | more        | chindwada      |
+| 2          | 1038    | 7          | 2024-05-16 |         4 | vaishali     | soni        | sambhaji nagar |
+| 2          | 1032    | 6          | 2024-11-04 |         4 | vaishali     | soni        | sambhaji nagar |
+| 9          | 1039    | 7          | 2024-01-12 |         1 | avantika     | tayde       | indore         |
+| 8          | 1040    | 6          | 2024-10-29 |         4 | Saloni       | chouhan     | harda          |
+| 3          | 1041    | 6          | 2024-05-19 |         9 | priyanshi    | sharma      | khandwa        |
++------------+---------+------------+------------+-----------+--------------+-------------+----------------+
