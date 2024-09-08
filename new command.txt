@@ -1,0 +1,91 @@
+1 .remove duplicate values : distinct
+ select distinct dept from employess;
++---------+
+| dept    |
++---------+
+| loan    |
+| IT      |
+| account |
+| deposit |
++---------+
+ select distinct dept,design from employess;
++---------+------------+
+| dept    | design     |
++---------+------------+
+| loan    | manager    |
+| IT      | associate  |
+| account | accountant |
+| deposit | associate  |
+| IT      | manager    |
++---------+------------+
+2.Order By
+ select * from employess order by name;
++--------+--------+------------+---------+
+| emp_Id | name   | design     | dept    |
++--------+--------+------------+---------+
+|    104 | alex   | accountant | account |
+|    103 | paul   | associate  | IT      |
+|    101 | raju   | manager    | loan    |
+|    106 | rohan  | manager    | IT      |
+|    105 | victor | associate  | deposit |
++--------+--------+------------+---------+
+3.Like
+ select * from employess where design like "%manager%";
++--------+-------+---------+------+
+| emp_Id | name  | design  | dept |
++--------+-------+---------+------+
+|    101 | raju  | manager | loan |
+|    106 | rohan | manager | IT   |
++--------+-------+---------+------+
+
+4. add new column
+ alter table employess add column lname varchar(25) after name;
++--------+--------+-------+------------+---------+
+| emp_Id | name   | lname | design     | dept    |
++--------+--------+-------+------------+---------+
+|    101 | raju   | NULL  | manager    | loan    |
+|    103 | paul   | NULL  | associate  | IT      |
+|    104 | alex   | NULL  | accountant | account |
+|    105 | victor | NULL  | associate  | deposit |
+|    106 | rohan  | NULL  | manager    | IT      |
++--------+--------+-------+------------+---------+
+
+alter table employess rename column name to fname;
++--------+--------+-------+------------+---------+
+| emp_Id | fname  | lname | design     | dept    |
++--------+--------+-------+------------+---------+
+|    101 | raju   | NULL  | manager    | loan    |
+|    103 | paul   | NULL  | associate  | IT      |
+|    104 | alex   | NULL  | accountant | account |
+|    105 | victor | NULL  | associate  | deposit |
+|    106 | rohan  | NULL  | manager    | IT      |
++--------+--------+-------+------------+---------+
+
+5.limit : for showing data
+select * from employess limit 3;
++--------+-------+---------+------------+---------+--------+
+| emp_Id | fname | lname   | design     | dept    | salary |
++--------+-------+---------+------------+---------+--------+
+|    101 | raju  | parihar | manager    | loan    |  93433 |
+|    103 | paul  | rai     | associate  | IT      |  45000 |
+|    104 | alex  | roy     | accountant | account |  55000 |
++--------+-------+---------+------------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employess limit 3,4;
++--------+--------+------------+------------+-------------+--------+
+| emp_Id | fname  | lname      | design     | dept        | salary |
++--------+--------+------------+------------+-------------+--------+
+|    105 | victor | surywanshi | associate  | deposit     |  20000 |
+|    106 | rohan  | sharma     | manager    | IT          |  66000 |
+|    107 | suraj  | pawar      | cashier    | Banking     |  70000 |
+|    108 | rani   | kashyap    | teamleader | stockmarket |  40000 |
++--------+--------+------------+------------+-------------+--------+
+
+Count:
+mysql> select count(*) from employess;
++----------+
+| count(*) |
++----------+
+|       10 |
++----------+
