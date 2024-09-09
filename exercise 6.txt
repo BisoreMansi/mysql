@@ -1,0 +1,8 @@
+1 .Print the current time (HH:MM:SS)
+ 2.Print the current date (yyyy-mm-dd)
+3.Print current day of the week (Monday, Tuesday...)
+4.What is the use case of CHAR datatype?
+5.Which datatype can be used to store value 123.456?
+6.Display date in format
+      dd:mm:yyyy
+      April 22nd at 22:00:00

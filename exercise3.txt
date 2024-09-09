@@ -1,0 +1,21 @@
+
+Task 1:
+101:Raju:Manager:Loan
+
+
+select concat_ws(':',emp_Id,name,design,dept) from employess where emp_Id = 101;
++----------------------------------------+
+| concat_ws(':',emp_Id,name,design,dept) |
++----------------------------------------+
+| 101:raju:manager:loan                  |
++----------------------------------------+
+
+Task2:
+101:Raju Rastogi:Manager:Loan
+
+Task3
+101:Raju:MANAGER:Loan
+
+Task4
+L101 Raju
+C102 Sham
