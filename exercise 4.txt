@@ -1,0 +1,60 @@
+1: Find Different type of departments in database?
+ select distinct dept from employess;
++-------------+
+| dept        |
++-------------+
+| loan        |
+| IT          |
+| account     |
+| deposit     |
+| Banking     |
+| stockmarket |
+| management  |
+| operation   |
+| hospital    |
++-------------+
+
+
+2: Display records with High-low salary
+select * from employess order by salary desc;
++--------+--------+------------+------------+-------------+--------+
+| emp_Id | fname  | lname      | design     | dept        | salary |
++--------+--------+------------+------------+-------------+--------+
+|    111 | babu   | vishnoi    | surgeon    | hospital    | 100000 |
+|    101 | raju   | parihar    | manager    | loan        |  93433 |
+|    107 | suraj  | pawar      | cashier    | Banking     |  70000 |
+|    106 | rohan  | sharma     | manager    | IT          |  66000 |
+|    104 | alex   | roy        | accountant | account     |  55000 |
+|    103 | paul   | rai        | associate  | IT          |  45000 |
+|    108 | rani   | kashyap    | teamleader | stockmarket |  40000 |
+|    110 | yash   | verma      | developer  | operation   |  30000 |
+|    109 | mansi  | patidar    | executive  | management  |  23000 |
+|    105 | victor | surywanshi | associate  | deposit     |  20000 |
++--------+--------+------------+------------+-------------+--------+
+3: How to see only top 3 records from a table?
+
+ select * from employess limit 3;
++--------+-------+---------+------------+---------+--------+
+| emp_Id | fname | lname   | design     | dept    | salary |
++--------+-------+---------+------------+---------+--------+
+|    101 | raju  | parihar | manager    | loan    |  93433 |
+|    103 | paul  | rai     | associate  | IT      |  45000 |
+|    104 | alex  | roy     | accountant | account |  55000 |
++--------+-------+---------+------------+---------+--------+
+
+4: Show records where first name start with letter 'A'
+ select * from employess where fname like "a%";
++--------+-------+-------+------------+---------+--------+
+| emp_Id | fname | lname | design     | dept    | salary |
++--------+-------+-------+------------+---------+--------+
+|    104 | alex  | roy   | accountant | account |  55000 |
++--------+-------+-------+------------+---------+--------+
+
+5: Show records where length of the lname is 4 characters
+select * from employess where length(lname) = 5;
++--------+-------+-------+-----------+-----------+--------+
+| emp_Id | fname | lname | design    | dept      | salary |
++--------+-------+-------+-----------+-----------+--------+
+|    107 | suraj | pawar | cashier   | Banking   |  70000 |
+|    110 | yash  | verma | developer | operation |  30000 |
++--------+-------+-------+-----------+-----------+--------+

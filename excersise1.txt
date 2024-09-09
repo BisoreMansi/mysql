@@ -1,0 +1,96 @@
+Create a database - bank_db
+Create a table - employees
+
+emp_id
+name
+desig
+dept
+*emp_id column should not allow duplicate and null values
+Value of emp_id column should auto increment
+
+*name column should not contain null value
+*desig column should have default value as 'Probation'
+
+create database bank_db;
+use bank_db;
+ create table employess(
+    -> emp_Id int primary key not null auto_increment,
+    -> name varchar(25) not null,
+    -> design varchar(25) default "probation");
+
+ alter table employess add column (dept varchar(25));
+
+insert into employess values(101,"raju","manager","loan");
+insert into employess(emp_Id ,name,design,dept)values(103,"paul","associate","loan"),(104,"alex","accountant","account"),(105,"victor","associate","deposit");
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from employess;
++--------+--------+------------+---------+
+| emp_Id | name   | design     | dept    |
++--------+--------+------------+---------+
+|    101 | raju   | manager    | loan    |
+|    102 | shyam  | cashier    | cash    |
+|    103 | paul   | associate  | loan    |
+|    104 | alex   | accountant | account |
+|    105 | victor | associate  | deposit |
++--------+--------+-----------
+
+ select emp_Id, name from employess;
++--------+--------+
+| emp_Id | name   |
++--------+--------+
+|    101 | raju   |
+|    102 | shyam  |
+|    103 | paul   |
+|    104 | alex   |
+|    105 | victor |
++--------+--------+
+> select * from employess where emp_id = 101 ;
++--------+------+---------+------+
+| emp_Id | name | design  | dept |
++--------+------+---------+------+
+|    101 | raju | manager | loan |
++--------+------+---------+------+
+mysql> select emp_Id ,name from employess where emp_Id = 101;
++--------+------+
+| emp_Id | name |
++--------+------+
+|    101 | raju |
++--------+------+
+ select * from employess where dept = "loan";
++--------+------+-----------+------+
+| emp_Id | name | design    | dept |
++--------+------+-----------+------+
+|    101 | raju | manager   | loan |
+|    103 | paul | associate | loan |
++--------+------+-----------+------+
+
+mysql> update employess set dept = "IT" where emp_Id = 103;
+Query OK, 1 row affected (0.16 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employess;
++--------+--------+------------+---------+
+| emp_Id | name   | design     | dept    |
++--------+--------+------------+---------+
+|    101 | raju   | manager    | loan    |
+|    102 | shyam  | cashier    | cash    |
+|    103 | paul   | associate  | IT      |
+|    104 | alex   | accountant | account |
+|    105 | victor | associate  | deposit |
++--------+--------+------------+---------+
+
+
+ delete from employess where emp_Id =102;
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from employess;
++--------+--------+------------+---------+
+| emp_Id | name   | design     | dept    |
++--------+--------+------------+---------+
+|    101 | raju   | manager    | loan    |
+|    103 | paul   | associate  | IT      |
+|    104 | alex   | accountant | account |
+|    105 | victor | associate  | deposit |
++--------+--------+------------+---------+
